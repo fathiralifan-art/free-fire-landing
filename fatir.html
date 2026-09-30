@@ -1,0 +1,850 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garena Free Fire - Landing Page Resmi Komunitas</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Russo+One&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0f',
+                            card: '#12131e',
+                            orange: '#ff5500',
+                            yellow: '#ffaa00',
+                            cyan: '#00f0ff',
+                            red: '#e60000'
+                        }
+                    },
+                    fontFamily: {
+                        gaming: ['"Russo One"', 'sans-serif'],
+                        rajdhani: ['"Rajdhani"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-orange': '0 0 20px rgba(255, 85, 0, 0.6)',
+                        'neon-cyan': '0 0 20px rgba(0, 240, 255, 0.5)',
+                        'fire-glow': '0 0 35px rgba(255, 102, 0, 0.8)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff5500;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffaa00;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(18, 19, 30, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(25, 27, 42, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 85, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 85, 0, 0.8);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 85, 0, 0.5);
+        }
+
+        /* Text Gradients */
+        .text-gradient-fire {
+            background: linear-gradient(135deg, #fff200 0%, #ff5500 50%, #ff0055 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #ffffff 0%, #00f0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Fiery Canvas Overlay */
+        #fire-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Custom Animations */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 85, 0, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 170, 0, 0.9); }
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        .clip-slant {
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans overflow-x-hidden selection:bg-brand-orange selection:text-black">
+
+    <!-- Fire Sparks Canvas Overlay for Hero -->
+    <canvas id="fire-canvas"></canvas>
+
+    <!-- Navbar Section -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-panel border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-gradient-to-tr from-brand-orange to-brand-yellow rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform shadow-neon-orange">
+                    <i class="fa-solid font-gaming text-2xl text-black">FF</i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-gaming text-2xl tracking-wider text-gradient-fire leading-none">FREE FIRE</span>
+                    <span class="text-[10px] font-rajdhani text-brand-cyan tracking-widest uppercase">BOOYAH BATTLE ROYALE</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 font-rajdhani font-semibold text-lg tracking-wide">
+                <a href="#home" class="hover:text-brand-orange transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Beranda</a>
+                <a href="#karakter" class="hover:text-brand-orange transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Karakter</a>
+                <a href="#mode" class="hover:text-brand-orange transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Mode Game</a>
+                <a href="#events" class="hover:text-brand-orange transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Booyah Pass</a>
+                <a href="#download" class="hover:text-brand-orange transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Unduh</a>
+            </nav>
+
+            <!-- CTA Button Navbar -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="#download" class="relative group px-6 py-2.5 rounded-md font-gaming text-sm uppercase tracking-wider text-black bg-gradient-to-r from-brand-yellow via-brand-orange to-red-600 transition-all duration-300 hover:scale-105 animate-pulse-glow overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <i class="fa-solid font-gaming fa-gamepad"></i> Mainkan Sekarang
+                    </span>
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-white focus:outline-none p-2" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars-staggered text-brand-orange"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-6 py-6 space-y-4 font-rajdhani text-xl">
+            <a href="#home" class="block hover:text-brand-orange transition-colors">Beranda</a>
+            <a href="#karakter" class="block hover:text-brand-orange transition-colors">Karakter</a>
+            <a href="#mode" class="block hover:text-brand-orange transition-colors">Mode Game</a>
+            <a href="#events" class="block hover:text-brand-orange transition-colors">Booyah Pass</a>
+            <a href="#download" class="block hover:text-brand-orange transition-colors">Unduh Game</a>
+            <a href="#download" class="block text-center mt-4 py-3 rounded-lg font-gaming text-black bg-gradient-to-r from-brand-yellow to-brand-orange uppercase text-sm">
+                Mainkan Sekarang
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden bg-gradient-to-b from-brand-dark/30 via-brand-dark/80 to-brand-dark">
+        <!-- Background Banner Image with Gradient Mask -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920&auto=format&fit=crop" alt="Free Fire Hero Background" class="w-full h-full object-cover opacity-30 scale-105 transition-transform duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-transparent to-brand-dark"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border-brand-orange/40 text-brand-yellow text-sm font-rajdhani font-bold uppercase tracking-widest mb-6">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                Season Terbaru 2026 Telah Tiba
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="font-gaming text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-none mb-6">
+                SURVIVAL SHOOTER <br>
+                <span class="text-gradient-fire">TERBAIK DI HP!</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto font-sans text-gray-300 text-base sm:text-lg md:text-xl mb-10 font-light">
+                Bertahan hidup dalam pertempuran 10 menit melawan 49 pemain lain. Bantai musuh, susun strategi kelompok, dan raih gelar <span class="text-brand-yellow font-bold">BOOYAH!</span>
+            </p>
+
+            <!-- Main CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#download" class="w-full sm:w-auto px-8 py-4 rounded-lg font-gaming text-lg uppercase tracking-wider text-black bg-gradient-to-r from-brand-yellow via-brand-orange to-red-600 shadow-fire-glow hover:scale-105 transition-transform flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-google-play text-xl"></i> Unduh Sekarang
+                </a>
+                <button onclick="openVideoModal()" class="w-full sm:w-auto px-8 py-4 rounded-lg font-gaming text-lg uppercase tracking-wider text-white glass-panel hover:bg-white/10 hover:border-brand-cyan transition-all flex items-center justify-center gap-3 group">
+                    <i class="fa-solid fa-play text-brand-cyan group-hover:scale-125 transition-transform"></i> Tonton Trailer
+                </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="font-gaming text-2xl sm:text-3xl text-brand-orange">1B+</div>
+                    <div class="font-rajdhani text-sm text-gray-400 uppercase tracking-wider font-semibold">Total Unduhan</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="font-gaming text-2xl sm:text-3xl text-brand-yellow">10 Mins</div>
+                    <div class="font-rajdhani text-sm text-gray-400 uppercase tracking-wider font-semibold">Durasi Match Ringkas</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="font-gaming text-2xl sm:text-3xl text-brand-cyan">50M+</div>
+                    <div class="font-rajdhani text-sm text-gray-400 uppercase tracking-wider font-semibold">Rating 5 Bintang</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl text-center">
+                    <div class="font-gaming text-2xl sm:text-3xl text-red-500">50 Players</div>
+                    <div class="font-rajdhani text-sm text-gray-400 uppercase tracking-wider font-semibold">Battle Royale Real-time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Karakter Populer Section -->
+    <section id="karakter" class="py-20 relative bg-brand-dark/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16">
+                <h2 class="font-gaming text-3xl sm:text-5xl uppercase tracking-wider mb-4">
+                    PILIH <span class="text-gradient-fire">HERO & KARAKTER</span> ANDA
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto font-rajdhani text-lg">
+                    Kuasai arena dengan kemampuan spesial unik dari setiap karakter ikonik Free Fire.
+                </p>
+            </div>
+
+            <!-- Characters Grid Showcase -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="characters-container">
+                
+                <!-- Character Card 1: Alok -->
+                <div class="glass-card rounded-2xl overflow-hidden relative group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=800&auto=format&fit=crop" alt="Alok" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-brand-orange text-black font-gaming text-xs px-3 py-1 rounded-full uppercase">Support / Speed</span>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-gaming text-2xl text-white mb-1">DJ ALOK</h3>
+                        <p class="text-brand-yellow font-rajdhani font-bold text-sm mb-3">Skill: Drop the Beat</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Membuat aura 5 meter yang meningkatkan kecepatan bergerak sebesar 15% dan memulihkan HP untuk rekan satu tim secara berkala.
+                        </p>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span class="text-xs text-gray-400 font-rajdhani uppercase">Tipe Skill: Aktif</span>
+                            <button onclick="playSkillPreview('Drop the Beat')" class="text-brand-cyan hover:text-white font-rajdhani font-bold text-sm flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-bolt"></i> Coba Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Card 2: Chrono -->
+                <div class="glass-card rounded-2xl overflow-hidden relative group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=800&auto=format&fit=crop" alt="Chrono" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-brand-cyan text-black font-gaming text-xs px-3 py-1 rounded-full uppercase">Defense</span>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-gaming text-2xl text-white mb-1">CHRONO</h3>
+                        <p class="text-brand-cyan font-rajdhani font-bold text-sm mb-3">Skill: Time Turner</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Menciptakan pelindung gaya tak tertembus yang mampu menahan hingga 800 damage dari serangan musuh secara instan.
+                        </p>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span class="text-xs text-gray-400 font-rajdhani uppercase">Tipe Skill: Aktif</span>
+                            <button onclick="playSkillPreview('Time Turner')" class="text-brand-cyan hover:text-white font-rajdhani font-bold text-sm flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-shield-halved"></i> Coba Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Card 3: Kelly -->
+                <div class="glass-card rounded-2xl overflow-hidden relative group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Kelly" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-yellow-400 text-black font-gaming text-xs px-3 py-1 rounded-full uppercase">Rusher</span>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-gaming text-2xl text-white mb-1">KELLY "THE SWIFT"</h3>
+                        <p class="text-brand-yellow font-rajdhani font-bold text-sm mb-3">Skill: Dash / Deadly Velocity</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Meningkatkan kecepatan berlari sprint secara permanen dan memberikan bonus damage besar pada tembakan pertama setelah sprint.
+                        </p>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span class="text-xs text-gray-400 font-rajdhani uppercase">Tipe Skill: Pasif / Awakened</span>
+                            <button onclick="playSkillPreview('Deadly Velocity')" class="text-brand-cyan hover:text-white font-rajdhani font-bold text-sm flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-person-running"></i> Coba Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Card 4: Hayato -->
+                <div class="glass-card rounded-2xl overflow-hidden relative group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Hayato" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-red-600 text-white font-gaming text-xs px-3 py-1 rounded-full uppercase">Armor Penetration</span>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-gaming text-2xl text-white mb-1">HAYATO</h3>
+                        <p class="text-red-400 font-rajdhani font-bold text-sm mb-3">Skill: Bushido</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Semakin rendah HP yang Anda miliki, semakin tinggi penetrasi armor yang dihasilkan untuk menghancurkan rompi musuh.
+                        </p>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span class="text-xs text-gray-400 font-rajdhani uppercase">Tipe Skill: Pasif</span>
+                            <button onclick="playSkillPreview('Bushido')" class="text-brand-cyan hover:text-white font-rajdhani font-bold text-sm flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-khanda"></i> Coba Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Card 5: Wukong -->
+                <div class="glass-card rounded-2xl overflow-hidden relative group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=800&auto=format&fit=crop" alt="Wukong" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-green-500 text-black font-gaming text-xs px-3 py-1 rounded-full uppercase">Stealth</span>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-gaming text-2xl text-white mb-1">WUKONG</h3>
+                        <p class="text-green-400 font-rajdhani font-bold text-sm mb-3">Skill: Camouflage</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Transformasi menjadi semak-semak rumput camouflaged untuk mengelabuhi musuh. Cooldown reset setiap kali menjatuhkan musuh!
+                        </p>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span class="text-xs text-gray-400 font-rajdhani uppercase">Tipe Skill: Aktif</span>
+                            <button onclick="playSkillPreview('Camouflage')" class="text-brand-cyan hover:text-white font-rajdhani font-bold text-sm flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-tree"></i> Coba Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Card 6: Homer -->
+                <div class="glass-card rounded-2xl overflow-hidden relative group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=800&auto=format&fit=crop" alt="Homer" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-purple-600 text-white font-gaming text-xs px-3 py-1 rounded-full uppercase">Tactical Drone</span>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-gaming text-2xl text-white mb-1">HOMER</h3>
+                        <p class="text-purple-400 font-rajdhani font-bold text-sm mb-3">Skill: Senses Pulse</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Melepaskan drone pencari yang mencari musuh terdekat, menciptakan ledakan gelombang yang memperlambat dan menurunkan kecepatan tembak.
+                        </p>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                            <span class="text-xs text-gray-400 font-rajdhani uppercase">Tipe Skill: Aktif</span>
+                            <button onclick="playSkillPreview('Senses Pulse')" class="text-brand-cyan hover:text-white font-rajdhani font-bold text-sm flex items-center gap-1 transition-colors">
+                                <i class="fa-solid fa-crosshairs"></i> Coba Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Mode Game Utama Section -->
+    <section id="mode" class="py-20 relative bg-gradient-to-b from-brand-dark via-brand-card/50 to-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="font-gaming text-3xl sm:text-5xl uppercase tracking-wider mb-2">
+                        MODE <span class="text-gradient-cyan">PERMAINAN</span>
+                    </h2>
+                    <p class="text-gray-400 font-rajdhani text-lg">Pilih gaya bertempur favoritmu bersama teman seperjuangan.</p>
+                </div>
+            </div>
+
+            <!-- Game Modes Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Battle Royale -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group min-h-[280px]">
+                    <div class="absolute right-0 top-0 w-1/2 h-full opacity-20 group-hover:opacity-40 transition-opacity bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-orange/20 border border-brand-orange flex items-center justify-center text-brand-orange text-2xl mb-6">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <h3 class="font-gaming text-3xl text-white mb-2">BATTLE ROYALE (50 Players)</h3>
+                        <p class="text-gray-300 max-w-md text-sm leading-relaxed">
+                            Terjun payung di pulau terpencil, temukan senjata terbaik, bertahan dalam zona aman yang makin menyempit, dan jadilah yang terakhir bertahan untuk BOOYAH!
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center gap-4 text-xs font-rajdhani font-bold tracking-widest text-brand-yellow uppercase">
+                        <span><i class="fa-solid fa-users"></i> Solo / Duo / Squad</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-clock"></i> ~10 Menit</span>
+                    </div>
+                </div>
+
+                <!-- Clash Squad -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group min-h-[280px]">
+                    <div class="absolute right-0 top-0 w-1/2 h-full opacity-20 group-hover:opacity-40 transition-opacity bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-cyan/20 border border-brand-cyan flex items-center justify-center text-brand-cyan text-2xl mb-6">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                        </div>
+                        <h3 class="font-gaming text-3xl text-white mb-2">CLASH SQUAD 4v4</h3>
+                        <p class="text-gray-300 max-w-md text-sm leading-relaxed">
+                            Mode bertempo tinggi! Beli senjata di setiap ronde, atur strategi ekonomi tim, dan hancurkan tim musuh dalam pertempuran Best-of-7 yang sengit.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center gap-4 text-xs font-rajdhani font-bold tracking-widest text-brand-cyan uppercase">
+                        <span><i class="fa-solid fa-people-group"></i> 4 VS 4 Team Deathmatch</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-trophy"></i> Ranked Mode</span>
+                    </div>
+                </div>
+
+                <!-- Lone Wolf -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group min-h-[280px]">
+                    <div class="absolute right-0 top-0 w-1/2 h-full opacity-20 group-hover:opacity-40 transition-opacity bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-red-500/20 border border-red-500 flex items-center justify-center text-red-500 text-2xl mb-6">
+                            <i class="fa-solid fa-crosshairs"></i>
+                        </div>
+                        <h3 class="font-gaming text-3xl text-white mb-2">LONE WOLF (1v1 / 2v2)</h3>
+                        <p class="text-gray-300 max-w-md text-sm leading-relaxed">
+                            Buktikan mekanik individu murnimu di arena Iron Cage. Pilih senjata secara bergiliran dan kalahkan lawan dalam duel satu lawan satu.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center gap-4 text-xs font-rajdhani font-bold tracking-widest text-red-400 uppercase">
+                        <span><i class="fa-solid fa-user-ninja"></i> Duel Mekanik Purba</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-skull"></i> 1v1 / 2v2</span>
+                    </div>
+                </div>
+
+                <!-- Craftland -->
+                <div class="glass-card rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group min-h-[280px]">
+                    <div class="absolute right-0 top-0 w-1/2 h-full opacity-20 group-hover:opacity-40 transition-opacity bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500 flex items-center justify-center text-purple-400 text-2xl mb-6">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                        <h3 class="font-gaming text-3xl text-white mb-2">CRAFTLAND (Map Custom)</h3>
+                        <p class="text-gray-300 max-w-md text-sm leading-relaxed">
+                            Bebaskan imajinasimu! Buat peta sendiri, rancang aturan permainan kustom, dan undang teman-temanmu untuk mencoba arena buatanmu.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center gap-4 text-xs font-rajdhani font-bold tracking-widest text-purple-400 uppercase">
+                        <span><i class="fa-solid fa-wand-magic-sparkles"></i> Mode Kreator Komunitas</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Berita & Event Terbaru -->
+    <section id="events" class="py-20 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Season Banner -->
+            <div class="relative rounded-3xl overflow-hidden glass-panel border border-brand-orange/40 p-8 sm:p-12 mb-16 flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="max-w-2xl z-10">
+                    <span class="bg-gradient-to-r from-brand-orange to-brand-yellow text-black font-gaming text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                        BOOYAH PASS SEASON INI
+                    </span>
+                    <h2 class="font-gaming text-3xl sm:text-5xl text-white mt-4 mb-4">
+                        CYBER INFERNO PASS
+                    </h2>
+                    <p class="text-gray-300 font-sans text-base mb-6">
+                        Buka skin senjata legendary <span class="text-brand-yellow font-bold">M1887 Cyber Blaze</span>, bundle eksklusif Neon Phantom, emote animasi terbaru, dan ratusan Diamond rewards!
+                    </p>
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <a href="#download" class="px-6 py-3 rounded-lg font-gaming text-black bg-brand-yellow hover:bg-brand-orange transition-colors uppercase text-sm">
+                            Claim Pass Sekarang
+                        </a>
+                        <span class="text-sm font-rajdhani text-gray-400">
+                            <i class="fa-regular fa-clock text-brand-orange"></i> Sisa Waktu: 12 Hari Lagi
+                        </span>
+                    </div>
+                </div>
+
+                <div class="relative z-10 w-full lg:w-1/3 flex justify-center">
+                    <div class="glass-card p-4 rounded-2xl border-2 border-brand-yellow/50 shadow-neon-orange animate-pulse">
+                        <img src="https://images.unsplash.com/photo-1589241062272-c0a000072dfa?q=80&w=600&auto=format&fit=crop" alt="Booyah Pass Rewards" class="rounded-xl w-full h-48 object-cover">
+                        <div class="mt-3 text-center">
+                            <span class="font-gaming text-lg text-brand-yellow">BUNDLE EXCLUSIVE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest News Grid -->
+            <h3 class="font-gaming text-2xl uppercase tracking-wider mb-8 text-gradient-fire">BERITA & EVENT HARI INI</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600&auto=format&fit=crop" alt="Esports Tournament" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-rajdhani font-bold text-brand-cyan uppercase">ESPORTS WORLD SERIES</span>
+                        <h4 class="font-gaming text-lg text-white mt-1 mb-2">Free Fire World Series (FFWS) 2026 Grand Final</h4>
+                        <p class="text-gray-400 text-xs line-clamp-2">Saksikan duel 12 tim eSports terbaik dunia memperebutkan total prize pool Rp 30 Miliar!</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="New Incubator Skin" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-rajdhani font-bold text-brand-yellow uppercase">SPIN EVENT</span>
+                        <h4 class="font-gaming text-lg text-white mt-1 mb-2">Incubator Gun Skin: M4A1 Dragon Fire</h4>
+                        <p class="text-gray-400 text-xs line-clamp-2">Dapatkan rate-up peningkatan rate tembak dan damage untuk M4A1 di Luck Royale minggu ini.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600&auto=format&fit=crop" alt="Patch Update" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-rajdhani font-bold text-green-400 uppercase">UPDATE PATCH OB44</span>
+                        <h4 class="font-gaming text-lg text-white mt-1 mb-2">Catatan Patch Update OB44 Terbaru</h4>
+                        <p class="text-gray-400 text-xs line-clamp-2">Penyesuaian balancing karakter, penyempurnaan map Bermuda, serta item taktikal baru Gloo Maker.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Download & System Requirements -->
+    <section id="download" class="py-20 relative bg-gradient-to-t from-brand-dark via-brand-card/80 to-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16">
+                <h2 class="font-gaming text-3xl sm:text-5xl uppercase tracking-wider mb-4">
+                    UNDUH & <span class="text-gradient-fire">MAIN SEKARANG</span>
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto font-rajdhani text-lg">
+                    Tersedia gratis di Android dan iOS. Siapkan perangkatmu dan raih Booyah pertama!
+                </p>
+            </div>
+
+            <!-- Download Badges -->
+            <div class="flex flex-wrap justify-center gap-6 mb-16">
+                <!-- Google Play Button -->
+                <button onclick="simulateDownload('Google Play Store')" class="glass-card px-8 py-4 rounded-xl flex items-center gap-4 hover:border-brand-orange transition-all group">
+                    <i class="fa-brands fa-google-play text-4xl text-brand-yellow group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left">
+                        <div class="text-xs font-rajdhani text-gray-400 uppercase">GET IT ON</div>
+                        <div class="font-gaming text-xl text-white">Google Play</div>
+                    </div>
+                </button>
+
+                <!-- App Store Button -->
+                <button onclick="simulateDownload('Apple App Store')" class="glass-card px-8 py-4 rounded-xl flex items-center gap-4 hover:border-brand-cyan transition-all group">
+                    <i class="fa-brands fa-apple text-4xl text-brand-cyan group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left">
+                        <div class="text-xs font-rajdhani text-gray-400 uppercase">DOWNLOAD ON THE</div>
+                        <div class="font-gaming text-xl text-white">App Store</div>
+                    </div>
+                </button>
+
+                <!-- Direct APK Download Button -->
+                <button onclick="simulateDownload('Direct APK')" class="glass-card px-8 py-4 rounded-xl flex items-center gap-4 hover:border-green-400 transition-all group">
+                    <i class="fa-solid fa-file-arrow-down text-4xl text-green-400 group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left">
+                        <div class="text-xs font-rajdhani text-gray-400 uppercase">DIRECT DOWNLOAD</div>
+                        <div class="font-gaming text-xl text-white">APK File (MAX)</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- System Specs Comparison Grid -->
+            <div class="max-w-4xl mx-auto glass-panel rounded-2xl p-6 sm:p-8 border border-white/10">
+                <h3 class="font-gaming text-2xl text-center text-white mb-8">SPESIFIKASI PERANGKAT</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Android Specs -->
+                    <div class="bg-brand-dark/50 p-6 rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3 mb-4 text-brand-yellow">
+                            <i class="fa-brands fa-android text-2xl"></i>
+                            <h4 class="font-gaming text-xl text-white">SPESIFIKASI ANDROID</h4>
+                        </div>
+                        <ul class="space-y-3 font-rajdhani text-gray-300 text-sm">
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">OS Minimum:</span>
+                                <span>Android 4.4 / Higher</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">RAM Rekomendasi:</span>
+                                <span>3 GB / 4 GB+ (Free Fire MAX)</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">Processor:</span>
+                                <span>Octa-Core 2.0 GHz</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-400">Sisa Penyimpanan:</span>
+                                <span>Minimal 2.5 GB</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- iOS Specs -->
+                    <div class="bg-brand-dark/50 p-6 rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3 mb-4 text-brand-cyan">
+                            <i class="fa-brands fa-apple text-2xl"></i>
+                            <h4 class="font-gaming text-xl text-white">SPESIFIKASI iOS</h4>
+                        </div>
+                        <ul class="space-y-3 font-rajdhani text-gray-300 text-sm">
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">OS Minimum:</span>
+                                <span>iOS 11.0 Atau Terbaru</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">Perangkat Rekomendasi:</span>
+                                <span>iPhone 8 / iPad Air 3 atau lebih baru</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">RAM Rekomendasi:</span>
+                                <span>3 GB RAM</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-400">Sisa Penyimpanan:</span>
+                                <span>Minimal 3.0 GB</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8 pb-8 border-b border-white/10">
+                <!-- Brand Info -->
+                <div class="text-center md:text-left">
+                    <a href="#" class="font-gaming text-2xl text-gradient-fire inline-block mb-2">GARENA FREE FIRE</a>
+                    <p class="text-xs text-gray-500 max-w-sm">Landing Page Fans & Komunitas Resmi Free Fire Indonesia. Semua hak cipta, merek dagang, dan materi game milik Garena International.</p>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-white hover:text-brand-orange hover:border-brand-orange transition-colors">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-white hover:text-brand-orange hover:border-brand-orange transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-white hover:text-brand-orange hover:border-brand-orange transition-colors">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-white hover:text-brand-orange hover:border-brand-orange transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Legal -->
+            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 Garena Free Fire Community Page. All rights reserved.</p>
+                <div class="flex space-x-6 font-rajdhani">
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-white transition-colors">Dukungan / Support</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Video Trailer Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div class="relative w-full max-w-4xl bg-brand-card rounded-2xl overflow-hidden border border-brand-orange/40">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-10 text-white hover:text-brand-orange text-2xl font-bold bg-black/50 rounded-full w-10 h-10 flex items-center justify-center">
+                &times;
+            </button>
+            <div class="aspect-video w-full">
+                <iframe id="trailer-iframe" class="w-full h-full" src="" title="Free Fire Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skill Preview Toast/Modal Alert -->
+    <div id="toast-modal" class="fixed bottom-8 right-8 z-50 hidden max-w-sm glass-panel border border-brand-cyan/50 p-4 rounded-xl shadow-neon-cyan animate-bounce">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-cyan text-2xl"></i>
+            <div>
+                <h5 class="font-gaming text-sm text-white" id="toast-title">SKILL EFFECT ACTIVATED</h5>
+                <p class="text-xs text-gray-300" id="toast-message">Memuat simulasi audio-visual skill...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Fire Canvas Particle Simulation
+        const canvas = document.getElementById('fire-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Spark {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.opacity = Math.random() * 0.8 + 0.2;
+                this.color = Math.random() > 0.5 ? '#ff5500' : '#ffaa00';
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.opacity -= 0.003;
+
+                if (this.opacity <= 0 || this.y < 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        const sparks = Array.from({ length: 60 }, () => new Spark());
+
+        function animateSparks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            sparks.forEach(spark => {
+                spark.update();
+                spark.draw();
+            });
+            requestAnimationFrame(animateSparks);
+        }
+
+        window.onload = function() {
+            animateSparks();
+        };
+
+        // Modal Handler for Video Trailer
+        function openVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('trailer-iframe');
+            // Sample Official Free Fire YouTube Trailer
+            iframe.src = "https://www.youtube.com/embed/5c_KxKx_iN0?autoplay=1";
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('trailer-iframe');
+            iframe.src = "";
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Skill Preview Toast Trigger
+        function playSkillPreview(skillName) {
+            const toast = document.getElementById('toast-modal');
+            const toastTitle = document.getElementById('toast-title');
+            const toastMessage = document.getElementById('toast-message');
+
+            toastTitle.innerText = `SKILL: ${skillName.toUpperCase()}`;
+            toastMessage.innerText = `Simulasi animasi & efek suara ${skillName} diaktifkan!`;
+
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        // Simulated Download Handler
+        function simulateDownload(platform) {
+            playSkillPreview(`Download ${platform}`);
+            setTimeout(() => {
+                alert(`Pengunduhan Free Fire untuk platform [${platform}] sedang dimulai! Selamat bertempur di Arena Booyah.`);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
+```
